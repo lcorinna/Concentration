@@ -14,17 +14,6 @@ class ConcentrationGame {
     private var indexOfOneAndOnlyFaceUpCard: Int? {
         get {
             return cards.indices.filter({ cards[$0].isFaceUp }).oneAndOnly
-            //            var foundIndex: Int?
-            //            for index in cards.indices {
-            //                if cards[index].isFaceUp {
-            //                    if foundIndex == nil {
-            //                        foundIndex = index
-            //                    } else {
-            //                        return nil
-            //                    }
-            //                }
-            //            }
-            //            return foundIndex
         }
         set(newValue) {
             for index in cards.indices {
@@ -53,10 +42,31 @@ class ConcentrationGame {
         for _ in 1...numberOfPairsOfCards {
             let card = Card()
             cards += [card, card]
+            
         }
-        //to do
+                cards.shuffle() // mix
     }
-}
+    
+//    func checkingEndGame(numberOfCards: Int) {
+//        var i = 0
+//        var j = 0
+//        for _ in 1...numberOfCards {
+//            print(cards[i].isFaceUp) //del
+//            if cards[i].isFaceUp == true {
+//                j += 1
+//            }
+//            i += 1
+//        }
+//        print("i - \(i)") //del
+//        if j == numberOfCards {
+//            print("end")
+//        } else {
+//            print("no end")
+//            print("j = \(j) and numberOfCards = \(numberOfCards)")
+//            print("")
+//        }
+//    }
+//}
 
 extension Collection {
     var oneAndOnly: Element? {

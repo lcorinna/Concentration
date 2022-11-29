@@ -30,8 +30,6 @@ class ViewController: UIViewController {
         }
     }
     
-//    private var emojiCollection = ["🦧", "🦍", "🐓", "🦫", "🐲", "🐁", "🦌", "🦓", "🐊", "🐋", "🦭", "🦐"]
-    
     private var emojiCollection = "🦧🦍🐓🦫🐲🐁🦌🦓🐊🐋🦭🦐"
     
     private var emojiDictionary = [Card:String]()
@@ -51,6 +49,7 @@ class ViewController: UIViewController {
             if card.isFaceUp {
                 button.setTitle(emojiIdentifier(for: card), for: .normal)
                 button.backgroundColor = .white
+                button.titleLabel?.font = .systemFont(ofSize: 50)
             } else {
                 button.setTitle("", for: .normal)
                 button.backgroundColor = card.isMatched ? UIColor(white: 1.0, alpha: 0.7) : .systemBlue
@@ -71,6 +70,10 @@ class ViewController: UIViewController {
         if let buttonIndex = buttonCollection.firstIndex(of: sender) {
             game.chooseCard(at: buttonIndex)
             updateViewFromModel()
+//            print("done")
+            //            sleep(1) //delete me
+//            game.checkingEndGame(numberOfCards: buttonCollection.count)
+            
         }
     }
 }

@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     
     private func updateTouches() {
         let attributes: [NSAttributedString.Key: Any] = [
-            .strokeWidth: 5.0,
+            .strokeWidth: 3.0,
             .strokeColor: UIColor.red
         ]
         let attributesString = NSAttributedString(string: "Touches: \(touches)", attributes: attributes)
@@ -30,7 +30,7 @@ class ViewController: UIViewController {
         }
     }
     
-    private var emojiCollection = "🦧🦍🐓🦫🐲🐁🦌🦓🐊🐋🦭🦐"
+    private var emojiCollection = "🦧🦍🐓🦫🐲🐁🦌🦓🐊🐋🦭🦐🦈🤡🐐"
     
     private var emojiDictionary = [Card:String]()
     
@@ -52,8 +52,21 @@ class ViewController: UIViewController {
                 button.titleLabel?.font = .systemFont(ofSize: 50)
             } else {
                 button.setTitle("", for: .normal)
-                button.backgroundColor = card.isMatched ? UIColor(white: 1.0, alpha: 0.7) : .systemBlue
+                //                button.backgroundColor = card.isMatched ? UIColor(white: 1.0, alpha: 0.7) : .systemBlue
+                button.backgroundColor = card.isMatched ? .white : .systemBlue
             }
+        }
+    }
+    
+    private func checkingEndGame() {
+        var j = 0
+        for i in 0..<buttonCollection.count {
+            if buttonCollection[i].backgroundColor == .white {
+                j += 1
+            }
+        }
+        if j == (buttonCollection.count - 2) {
+            touchLabel.text = "You have won!"
         }
     }
     
@@ -66,14 +79,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func buttonAction(_ sender: UIButton) {
+        if touchLabel.text == "You have won!" {
+            return
+        }
         touches += 1
         if let buttonIndex = buttonCollection.firstIndex(of: sender) {
             game.chooseCard(at: buttonIndex)
             updateViewFromModel()
-//            print("done")
-            //            sleep(1) //delete me
-//            game.checkingEndGame(numberOfCards: buttonCollection.count)
-            
+            checkingEndGame()
         }
     }
 }

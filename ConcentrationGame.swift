@@ -42,31 +42,10 @@ class ConcentrationGame {
         for _ in 1...numberOfPairsOfCards {
             let card = Card()
             cards += [card, card]
-            
         }
-                cards.shuffle() // mix
+        cards.shuffle() // mix
     }
-    
-//    func checkingEndGame(numberOfCards: Int) {
-//        var i = 0
-//        var j = 0
-//        for _ in 1...numberOfCards {
-//            print(cards[i].isFaceUp) //del
-//            if cards[i].isFaceUp == true {
-//                j += 1
-//            }
-//            i += 1
-//        }
-//        print("i - \(i)") //del
-//        if j == numberOfCards {
-//            print("end")
-//        } else {
-//            print("no end")
-//            print("j = \(j) and numberOfCards = \(numberOfCards)")
-//            print("")
-//        }
-//    }
-//}
+}
 
 extension Collection {
     var oneAndOnly: Element? {

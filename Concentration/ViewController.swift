@@ -26,7 +26,7 @@ class ViewController: UIViewController {
     
     private(set) var touches: Int = 0 {
         didSet {
-            updateTouches()
+            touchLabel.text = "Touches: \(touches)"
         }
     }
     
@@ -52,21 +52,8 @@ class ViewController: UIViewController {
                 button.titleLabel?.font = .systemFont(ofSize: 50)
             } else {
                 button.setTitle("", for: .normal)
-                //                button.backgroundColor = card.isMatched ? UIColor(white: 1.0, alpha: 0.7) : .systemBlue
-                button.backgroundColor = card.isMatched ? .white : .systemBlue
+                button.backgroundColor = card.isMatched ? UIColor(white: 1.0, alpha: 0.7) : .systemBlue
             }
-        }
-    }
-    
-    private func checkingEndGame() {
-        var j = 0
-        for i in 0..<buttonCollection.count {
-            if buttonCollection[i].backgroundColor == .white {
-                j += 1
-            }
-        }
-        if j == (buttonCollection.count - 2) {
-            touchLabel.text = "You have won!"
         }
     }
     
@@ -78,15 +65,30 @@ class ViewController: UIViewController {
         }
     }
     
+    private func gameOver() {
+        for index in buttonCollection.indices {
+            let button = buttonCollection[index]
+            let card = game.cards[index]
+            button.setTitle(emojiIdentifier(for: card), for: .normal)
+            button.backgroundColor = .white
+            button.titleLabel?.font = .systemFont(ofSize: 50)
+        }
+        let vc = SecondViewController(resultOfTouches: touches)
+        present(vc, animated: true, completion: nil)
+    }
+    
     @IBAction private func buttonAction(_ sender: UIButton) {
-        if touchLabel.text == "You have won!" {
+        if game.numberOfPairsThatDidNotMatch == 0 {
+            gameOver()
             return
         }
         touches += 1
         if let buttonIndex = buttonCollection.firstIndex(of: sender) {
             game.chooseCard(at: buttonIndex)
             updateViewFromModel()
-            checkingEndGame()
+            if game.numberOfPairsThatDidNotMatch == 0 {
+                gameOver()
+            }
         }
     }
 }

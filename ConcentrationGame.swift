@@ -19,9 +19,10 @@ class ConcentrationGame {
             for index in cards.indices {
                 cards[index].isFaceUp = (index == newValue)
             }
-            
         }
     }
+    
+    var numberOfPairsThatDidNotMatch: Int
     
     func chooseCard(at index: Int) {
         if !cards[index].isMatched {
@@ -29,6 +30,7 @@ class ConcentrationGame {
                 if cards[matchingIndex] == cards[index] {
                     cards[matchingIndex].isMatched = true
                     cards[index].isMatched = true
+                    numberOfPairsThatDidNotMatch -= 1
                 }
                 cards[index].isFaceUp = true
             } else {
@@ -39,11 +41,12 @@ class ConcentrationGame {
     
     init(numberOfPairsOfCards: Int) {
         assert(numberOfPairsOfCards > 0, "ConcentrationGame.init(\(numberOfPairsOfCards): must have at least one pair of cards")
+        numberOfPairsThatDidNotMatch = numberOfPairsOfCards
         for _ in 1...numberOfPairsOfCards {
             let card = Card()
             cards += [card, card]
         }
-        cards.shuffle() // mix
+        cards.shuffle()
     }
 }
 

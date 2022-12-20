@@ -28,9 +28,9 @@ class SecondViewController: UIViewController {
         message.lineBreakMode = .byWordWrapping
         message.numberOfLines = 0
         message.textAlignment = .center
-
+        
         self.view.addSubview(message)
-
+        
         message.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         message.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         message.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true

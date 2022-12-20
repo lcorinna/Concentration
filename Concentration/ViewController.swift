@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     private func updateTouches() {
         let attributes: [NSAttributedString.Key: Any] = [
             .strokeWidth: 3.0,
-            .strokeColor: UIColor.red
+            .strokeColor: UIColor.black
         ]
         let attributesString = NSAttributedString(string: "Touches: \(touches)", attributes: attributes)
         touchLabel.attributedText = attributesString
